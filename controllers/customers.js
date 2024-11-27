@@ -62,3 +62,19 @@ export const updateCustomer = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+export const deleteCustomer = async (req, res) => {
+  try {
+    const {
+      params: { id },
+    } = req;
+    const customer = await Customer.findByPk(id);
+    //console.log("is customer? " + customer);
+    if (!customer)
+      return res.status(400).json({ error: "customer not found!" });
+    await customer.destroy();
+    res.json({ message: "customer deleted" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
