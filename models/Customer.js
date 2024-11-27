@@ -1,7 +1,7 @@
 import sequelize from "../db/index.js";
 import { DataTypes } from "sequelize";
 
-const User = sequelize.define("User", {
+const Customer = sequelize.define("Customer", {
   name: { type: DataTypes.STRING, allowNull: false },
   email: { type: DataTypes.STRING, allowNull: false },
   password: {type: DataTypes.STRING, allowNull: false}
@@ -9,4 +9,4 @@ const User = sequelize.define("User", {
 
 //User.sync({ logging: false});
 
-export default User;
+export default Customer;
