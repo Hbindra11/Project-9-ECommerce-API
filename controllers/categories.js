@@ -20,6 +20,7 @@ export const createCategory = async (req, res) => {
       return res.status(400).json({ error: "category already exists!" });
     if (!name)
       return res.status(404).json({ error: "please enter a category name" });
+    //need to validate category name. For example min length: 3, max length:12
     const category = await Category.create(req.body);
     res.json(category);
   } catch (err) {
@@ -52,7 +53,7 @@ export const updateCategory = async (req, res) => {
     const category = await Category.findByPk(id);
     if (!category)
       return res.status(400).json({ error: "category not found!" });
-    //console.log('value of category to update:'+req.body+" and id: "+id)
+    //need to validate category name. For example min length: 3, max length:12
     await category.update(req.body);
     res.json(req.body);
   } catch (err) {

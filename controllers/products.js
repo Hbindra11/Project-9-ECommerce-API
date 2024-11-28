@@ -22,6 +22,7 @@ export const createProduct = async (req, res) => {
       });
     const found = await Product.findOne({ where: { name, description } });
     if (found) return res.status(400).json({ error: "product already exists" });
+     //need to validate product name is min length 3 and max 12 etc and price is within min and max range
     const category = await Product.create(req.body);
     res.json(category);
   } catch (err) {
@@ -55,7 +56,7 @@ export const updateProduct = async (req, res) => {
         error:
           "please provide all fields: name, description, price, categoryId",
       });
-
+//need to validate product name is min length 3 and max 12 etc and price is within min and max range
     await product.update(req.body);
     res.json(req.body);
   } catch (err) {
