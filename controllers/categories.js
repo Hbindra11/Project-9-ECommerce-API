@@ -1,3 +1,4 @@
+import categorySchema from "../schemas/categorySchema.js";
 import Category from "../models/Category.js";
 import Product from "../models/Product.js";
 
@@ -21,6 +22,7 @@ export const createCategory = async (req, res) => {
     if (!name)
       return res.status(404).json({ error: "please enter a category name" });
     //need to validate category name. For example min length: 3, max length:12
+    await categorySchema.validateAsync({ categoryName: name });
     const category = await Category.create(req.body);
     res.json(category);
   } catch (err) {
@@ -54,6 +56,7 @@ export const updateCategory = async (req, res) => {
     if (!category)
       return res.status(400).json({ error: "category not found!" });
     //need to validate category name. For example min length: 3, max length:12
+    await categorySchema.validateAsync({ categoryName: name });
     await category.update(req.body);
     res.json(req.body);
   } catch (err) {
@@ -70,7 +73,7 @@ export const deleteCategory = async (req, res) => {
     if (!category)
       return res.status(404).json({ error: "category not found!" });
     await category.destroy();
-    res.json({message:"category was deleted successfully"})
+    res.json({ message: "category was deleted successfully" });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

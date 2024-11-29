@@ -1,3 +1,4 @@
+import orderSchema from "../schemas/orderSchema.js";
 import { JSONB } from "sequelize";
 import Customer from "../models/Customer.js";
 import Order from "../models/Order.js";
@@ -26,7 +27,10 @@ export const createOrder = async (req, res) => {
       return res
         .status(400)
         .json({ error: "customer with this Id not found!" });
+    //joi validation
+    await orderSchema.validateAsync({ orderTotal: total });
     const order = await Order.create(req.body);
+
     res.json(order);
     //console.log('here is the body: '+JSON.stringify(req.body))
   } catch (err) {
@@ -66,6 +70,8 @@ export const updateOrder = async (req, res) => {
       return res
         .status(400)
         .json({ error: "customer with this Id not found!" });
+    //joi validation
+    await orderSchema.validateAsync({ orderTotal: total });
     await order.update(req.body);
     res.json(req.body);
   } catch (err) {
@@ -81,7 +87,7 @@ export const deleteOrder = async (req, res) => {
     const order = await Order.findByPk(id);
     if (!order) return res.status(400).json({ error: "order not found" });
     await order.destroy();
-    res.json({message:"order was deleted"})
+    res.json({ message: "order was deleted" });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

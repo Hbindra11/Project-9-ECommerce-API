@@ -26,8 +26,9 @@ export const createCustomer = async (req, res) => {
     if (found)
       return res.status(400).json({ error: "customer already exists!" });
     //need to validate customer email address has @ and password is min length 3 and max 12 etc
-     await customerSchema.validateAsync({customerName: name,}); //customerSchema.validate({ customerName: name, customerEmail: email })
-     await customerSchema.validateAsync({customerEmail: email })
+    await customerSchema.validateAsync({ customerName: name }); //customerSchema.validate({ customerName: name, customerEmail: email })
+    await customerSchema.validateAsync({ customerEmail: email });
+    await customerSchema.validateAsync({ customerPassword: password });
     const customer = await Customer.create(req.body);
     res.json(customer);
   } catch (error) {
@@ -62,6 +63,9 @@ export const updateCustomer = async (req, res) => {
     const customer = await Customer.findByPk(id); //console.log('here is the id: '+id+'found? '+customer);
     if (!customer) res.status(404).json({ message: "customer does not exit!" });
     //need to validate customer email address has @ and password is min length 6 and max 12 etc
+    await customerSchema.validateAsync({ customerName: name }); //customerSchema.validate({ customerName: name, customerEmail: email })
+    await customerSchema.validateAsync({ customerEmail: email });
+    await customerSchema.validateAsync({ customerPassword: password });
     await customer.update(req.body);
     res.json(req.body);
   } catch (error) {
