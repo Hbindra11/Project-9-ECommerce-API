@@ -38,6 +38,10 @@ This project is an eCommerce API built with Node.js. It provides endpoints for m
     ```
 2. Access the API at `http://localhost:3000`.
 
+## Live API
+This API can be accessed as a web service at the following address:  
+[https://project-9-ecommerce-api.onrender.com](https://project-9-ecommerce-api.onrender.com)
+
 ## API Endpoints
 | Method | Endpoint         | Description               |
 |--------|------------------|---------------------------|
@@ -65,3 +69,16 @@ This project is an eCommerce API built with Node.js. It provides endpoints for m
 | DELETE   | /api/orders/id    | delete a specific order data  |
 | GET   | /api/orders/id    | get data of a specific order  |
 
+## Accessing Endpoints with Postman
+1. Download and install [Postman](https://www.postman.com/downloads/).
+2. Import the provided Postman collection:
+    - Open Postman.
+    - Click on "Import" in the top-left corner.
+    - Select the Postman collection file included in the repository.
+3. Set up the environment:
+    - Create a new environment in Postman.
+    - Add a variable `baseUrl` with the value `http://localhost:3000` (or the live API URL if deployed).
+4. Use the imported collection to test the API:
+    - Select an endpoint from the collection.
+    - Modify the request body or parameters as needed.
+    - Click "Send" to execute the request and view the response.
